@@ -1,8 +1,9 @@
-﻿namespace RentalPoint.Api.Models
+﻿using RentalPoint.Api.Abstracts;
+
+namespace RentalPoint.Api.Models
 {
-    public class Review
+    public class Review : BaseModel
     {
-        public int Id { get; set; }
         public int ItemId { get; set; }
         public int ClientId { get; set; }
         public int Rating { get; set; }
