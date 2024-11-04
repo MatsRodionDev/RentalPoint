@@ -4,6 +4,6 @@ namespace RentalPoint.Api.Abstracts
 {
     public class BaseModel : IBaseModel
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
     }
 }

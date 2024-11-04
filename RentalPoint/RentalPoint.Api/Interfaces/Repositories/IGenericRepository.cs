@@ -6,9 +6,9 @@ namespace RentalPoint.Api.Interfaces.Repositories
        where TEntity : IBaseModel
     {
         Task<List<TEntity>> GetAllAsync(CancellationToken cancellationToken);
-        Task<TEntity?> GetByIdAsync(int id, CancellationToken cancellationToken);
+        Task<TEntity?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
         Task AddAsync(TEntity model, CancellationToken cancellationToken);
-        Task Update(TEntity model, CancellationToken cancellationToken);
-        Task Delete(TEntity model, CancellationToken cancellationToken);
+        Task UpdateAsync(TEntity model, CancellationToken cancellationToken);
+        Task DeleteAsync(TEntity model, CancellationToken cancellationToken);
     }
 }
