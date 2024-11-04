@@ -1,8 +1,9 @@
-﻿namespace RentalPoint.Api.Models
+﻿using RentalPoint.Api.Abstracts;
+
+namespace RentalPoint.Api.Models
 {
-    public class Client
+    public class Client : BaseModel
     {
-        public int Id { get; set; }
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;

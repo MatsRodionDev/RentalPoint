@@ -1,8 +1,9 @@
-﻿namespace RentalPoint.Api.Models
+﻿using RentalPoint.Api.Abstracts;
+
+namespace RentalPoint.Api.Models
 {
-    public class Category
+    public class Category : BaseModel
     {
-        public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public ICollection<ItemCategory>? ItemCategories { get; set; }
     }

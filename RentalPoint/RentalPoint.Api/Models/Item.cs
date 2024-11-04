@@ -1,8 +1,9 @@
-﻿namespace RentalPoint.Api.Models
+﻿using RentalPoint.Api.Abstracts;
+
+namespace RentalPoint.Api.Models
 {
-    public class Item
+    public class Item : BaseModel
     {
-        public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public decimal Price { get; set; }

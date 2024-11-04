@@ -1,8 +1,9 @@
-﻿namespace RentalPoint.Api.Models
+﻿using RentalPoint.Api.Abstracts;
+
+namespace RentalPoint.Api.Models
 {
-    public class Payment
+    public class Payment : BaseModel
     {
-        public int Id { get; set; }
         public int RentalId { get; set; }
         public decimal Amount { get; set; }
         public DateTime PaymentDate { get; set; }
