@@ -16,7 +16,7 @@ namespace RentalPoint.Api
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<ItemCategory> ItemCategories { get; set; }
-        public DbSet<Discount> Discounts { get; set; }
+        public DbSet<Event> Discounts { get; set; }
         public DbSet<Review> Reviews { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -32,7 +32,7 @@ namespace RentalPoint.Api
                 .HasForeignKey(r => r.ItemId);
 
             modelBuilder.Entity<ItemCategory>()
-                .HasKey(ic => new { ic.ItemId, ic.CategoryId });
+                .HasKey(ic => ic.Id);
 
             modelBuilder.Entity<ItemCategory>()
                 .HasOne(ic => ic.Item)

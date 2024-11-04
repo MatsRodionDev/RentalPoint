@@ -4,7 +4,7 @@ namespace RentalPoint.Api.Models
 {
     public class Payment : BaseModel
     {
-        public int RentalId { get; set; }
+        public Guid RentalId { get; set; }
         public decimal Amount { get; set; }
         public DateTime PaymentDate { get; set; }
         public string PaymentMethod { get; set; } = string.Empty;

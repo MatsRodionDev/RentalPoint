@@ -2,7 +2,7 @@
 
 namespace RentalPoint.Api.Interfaces.Repositories
 {
-    public interface IDiscountRepository : IGenericRepository<Discount>
+    public interface IEventRepository : IGenericRepository<Event>
     {
     }
 }

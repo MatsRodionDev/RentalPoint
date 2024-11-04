@@ -21,7 +21,7 @@ namespace RentalPoint.Api.Repositories
             await _dbSet.AddAsync(model, cancellationToken);
         }
 
-        public virtual async Task Delete(TEntity model, CancellationToken cancellationToken)
+        public virtual async Task DeleteAsync(TEntity model, CancellationToken cancellationToken)
         {
             _dbSet.Remove(model);
 
@@ -35,7 +35,7 @@ namespace RentalPoint.Api.Repositories
                 .ToListAsync(cancellationToken);
         }
 
-        public virtual async Task<TEntity?> GetByIdAsync(int id, CancellationToken cancellationToken)
+        public virtual async Task<TEntity?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
         {
             return await _dbSet
                 .AsNoTracking()
@@ -43,7 +43,7 @@ namespace RentalPoint.Api.Repositories
 
         }
 
-        public virtual async Task Update(TEntity model, CancellationToken cancellationToken)
+        public virtual async Task UpdateAsync(TEntity model, CancellationToken cancellationToken)
         {
             _dbSet.Entry(model).State = EntityState.Modified;
 
