@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using RentalPoint.Api;
 using RentalPoint.Api.Interfaces.Repositories;
 using RentalPoint.Api.Interfaces.Services;
+using RentalPoint.Api.Middlewares;
 using RentalPoint.Api.Profiles;
 using RentalPoint.Api.Repositories;
 using RentalPoint.Api.Services;
@@ -36,6 +37,8 @@ builder.Services.AddScoped<IItemCategoryService,  ItemCategoryService>();
 builder.Services.AddAutoMapper(typeof(ApiProfile));
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {
