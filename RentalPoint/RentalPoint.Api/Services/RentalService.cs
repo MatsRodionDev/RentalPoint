@@ -2,6 +2,7 @@
 using RentalPoint.Api.Interfaces.Repositories;
 using RentalPoint.Api.Interfaces.Services;
 using RentalPoint.Api.Models;
+using System.Runtime.CompilerServices;
 
 namespace RentalPoint.Api.Services
 {
@@ -21,6 +22,7 @@ namespace RentalPoint.Api.Services
 
         public async Task RentItemAsync(Rental rental, CancellationToken cancellationToken)
         {
+            
             _ = await _itemRepository.GetByIdAsync(rental.ClientId, cancellationToken) ??
                 throw new NotFoundException("Item with such id doesn't exist");
 

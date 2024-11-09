@@ -9,5 +9,7 @@ namespace RentalPoint.Api.Repositories
         {
 
         }
+
+
     }
 }

@@ -24,11 +24,9 @@ namespace RentalPoint.Api.Migrations
 
             modelBuilder.Entity("RentalPoint.Api.Models.Category", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -41,11 +39,9 @@ namespace RentalPoint.Api.Migrations
 
             modelBuilder.Entity("RentalPoint.Api.Models.Client", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -68,13 +64,11 @@ namespace RentalPoint.Api.Migrations
                     b.ToTable("Clients");
                 });
 
-            modelBuilder.Entity("RentalPoint.Api.Models.Discount", b =>
+            modelBuilder.Entity("RentalPoint.Api.Models.Event", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -82,9 +76,6 @@ namespace RentalPoint.Api.Migrations
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime(6)");
-
-                    b.Property<decimal>("Percentage")
-                        .HasColumnType("decimal(65,30)");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime(6)");
@@ -96,11 +87,9 @@ namespace RentalPoint.Api.Migrations
 
             modelBuilder.Entity("RentalPoint.Api.Models.Item", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("AvailableQuantity")
                         .HasColumnType("int");
@@ -123,29 +112,30 @@ namespace RentalPoint.Api.Migrations
 
             modelBuilder.Entity("RentalPoint.Api.Models.ItemCategory", b =>
                 {
-                    b.Property<int>("ItemId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("char(36)");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ItemId")
+                        .HasColumnType("char(36)");
 
-                    b.HasKey("ItemId", "CategoryId");
+                    b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("ItemId");
 
                     b.ToTable("ItemCategories");
                 });
 
             modelBuilder.Entity("RentalPoint.Api.Models.Payment", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("char(36)");
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(65,30)");
@@ -157,8 +147,8 @@ namespace RentalPoint.Api.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("RentalId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("RentalId")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -169,17 +159,15 @@ namespace RentalPoint.Api.Migrations
 
             modelBuilder.Entity("RentalPoint.Api.Models.Rental", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("char(36)");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    b.Property<Guid>("ClientId")
+                        .HasColumnType("char(36)");
 
-                    b.Property<int>("ClientId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ItemId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ItemId")
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime>("RentalDate")
                         .HasColumnType("datetime(6)");
@@ -198,21 +186,19 @@ namespace RentalPoint.Api.Migrations
 
             modelBuilder.Entity("RentalPoint.Api.Models.Review", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("char(36)");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ClientId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ClientId")
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Comment")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("ItemId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ItemId")
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("Rating")
                         .HasColumnType("int");
