@@ -2,13 +2,14 @@ using Microsoft.EntityFrameworkCore;
 using RentalPoint.Api;
 using RentalPoint.Api.Interfaces.Repositories;
 using RentalPoint.Api.Interfaces.Services;
+using RentalPoint.Api.Profiles;
 using RentalPoint.Api.Repositories;
 using RentalPoint.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
+            options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
                             ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection")))); 
 
 builder.Services.AddControllers();
@@ -31,6 +32,8 @@ builder.Services.AddScoped<IReviewService, ReviewService>();
 builder.Services.AddScoped<IEventService, EventService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IItemCategoryService,  ItemCategoryService>();
+
+builder.Services.AddAutoMapper(typeof(ApiProfile));
 
 var app = builder.Build();
 

@@ -19,6 +19,7 @@ namespace RentalPoint.Api.Repositories
         public virtual async Task AddAsync(TEntity model, CancellationToken cancellationToken)
         {
             await _dbSet.AddAsync(model, cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken);
         }
 
         public virtual async Task DeleteAsync(TEntity model, CancellationToken cancellationToken)
@@ -26,7 +27,7 @@ namespace RentalPoint.Api.Repositories
             _dbSet.Remove(model);
 
             await _context.SaveChangesAsync(cancellationToken);
-        }
+        }   
 
         public virtual async Task<List<TEntity>> GetAllAsync(CancellationToken cancellationToken)
         {
