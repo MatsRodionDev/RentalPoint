@@ -1,3 +1,5 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using RentalPoint.Api;
 using RentalPoint.Api.Interfaces.Repositories;
@@ -6,6 +8,7 @@ using RentalPoint.Api.Middlewares;
 using RentalPoint.Api.Profiles;
 using RentalPoint.Api.Repositories;
 using RentalPoint.Api.Services;
+using RentalPoint.Api.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +19,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddControllers();
 
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddFluentValidationAutoValidation()
+    .AddFluentValidationClientsideAdapters()
+    .AddValidatorsFromAssemblyContaining<ClientRequestValidator>();
 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IClientRepository, ClientRepository>();

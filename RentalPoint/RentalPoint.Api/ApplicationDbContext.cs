@@ -3,13 +3,8 @@ using RentalPoint.Api.Models;
 
 namespace RentalPoint.Api
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-        {
-
-        }
-
         public DbSet<Client> Clients { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<Rental> Rentals { get; set; }
