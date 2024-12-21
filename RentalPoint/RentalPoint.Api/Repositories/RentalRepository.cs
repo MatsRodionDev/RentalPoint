@@ -16,7 +16,6 @@ namespace RentalPoint.Api.Repositories
         {
             return await _dbSet
                 .Include(r => r.Item)
-                .Include(r => r.Payment)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.Id == id, cancellationToken);
         }
@@ -25,7 +24,6 @@ namespace RentalPoint.Api.Repositories
         {
             return await _dbSet
                 .Include(r => r.Item)
-                .Include(r => r.Payment)
                 .AsNoTracking()
                 .ToListAsync(cancellationToken);
         }

@@ -53,7 +53,7 @@ namespace RentalPoint.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Update(Guid id, CancellationToken cancellationToken)
+        public async Task<IActionResult> Delet(Guid id, CancellationToken cancellationToken)
         {
             await _categoryService.DeleteAsync(id, cancellationToken);
 

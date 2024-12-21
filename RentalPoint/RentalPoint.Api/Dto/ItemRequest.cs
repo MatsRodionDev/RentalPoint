@@ -5,5 +5,6 @@ namespace RentalPoint.Api.Dto
     public record ItemRequest(
         string Name,
         string Description,
-        decimal Price);
+        decimal Price,
+        Guid CategoryId);
 }

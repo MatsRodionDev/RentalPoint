@@ -22,17 +22,15 @@ namespace RentalPoint.Api.Profiles
                 .ReverseMap();
             CreateMap<Client, ClientResponse>()
                 .ReverseMap();
-            CreateMap<Client, ClientReviewResponse>()
-                .ReverseMap();
-
-            CreateMap<Review, ReviewRequest>()
-                .ReverseMap();
-            CreateMap<Review, ReviewResponse>()
-                .ReverseMap();
 
             CreateMap<Rental, RentalRequest>()
                 .ReverseMap();
             CreateMap<Rental, RentalResponse>()
+                .ReverseMap();
+
+            CreateMap<Event, EventRequest>()
+                .ReverseMap();
+            CreateMap<Event, EventResponse>()
                 .ReverseMap();
         }
     }

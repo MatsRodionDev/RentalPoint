@@ -5,5 +5,6 @@ namespace RentalPoint.Api.Interfaces.Services
     public interface IRentalService : IGenericService<Rental>
     {
         Task RentItemAsync(Rental rental, CancellationToken cancellationToken);
+        Task BackItemAsync(Guid rentalId, CancellationToken cancellationToken);
     }
 }
