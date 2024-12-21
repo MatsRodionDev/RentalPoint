@@ -12,8 +12,8 @@ using RentalPoint.Api;
 namespace RentalPoint.Api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241108105116_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20241201140329_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -94,12 +94,15 @@ namespace RentalPoint.Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<int>("AvailableQuantity")
-                        .HasColumnType("int");
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<bool>("IsRented")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -110,54 +113,9 @@ namespace RentalPoint.Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Items");
-                });
-
-            modelBuilder.Entity("RentalPoint.Api.Models.ItemCategory", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("CategoryId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("ItemId")
-                        .HasColumnType("char(36)");
-
-                    b.HasKey("Id");
-
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("ItemId");
-
-                    b.ToTable("ItemCategories");
-                });
-
-            modelBuilder.Entity("RentalPoint.Api.Models.Payment", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.Property<DateTime>("PaymentDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("PaymentMethod")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<Guid>("RentalId")
-                        .HasColumnType("char(36)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RentalId");
-
-                    b.ToTable("Payments");
+                    b.ToTable("Items");
                 });
 
             modelBuilder.Entity("RentalPoint.Api.Models.Rental", b =>
@@ -172,11 +130,8 @@ namespace RentalPoint.Api.Migrations
                     b.Property<Guid>("ItemId")
                         .HasColumnType("char(36)");
 
-                    b.Property<DateTime>("RentalDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime?>("ReturnDate")
-                        .HasColumnType("datetime(6)");
+                    b.Property<bool>("ItemIsBacked")
+                        .HasColumnType("tinyint(1)");
 
                     b.HasKey("Id");
 
@@ -187,65 +142,15 @@ namespace RentalPoint.Api.Migrations
                     b.ToTable("Rentals");
                 });
 
-            modelBuilder.Entity("RentalPoint.Api.Models.Review", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("ClientId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("Comment")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<Guid>("ItemId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ReviewDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClientId");
-
-                    b.HasIndex("ItemId");
-
-                    b.ToTable("Reviews");
-                });
-
-            modelBuilder.Entity("RentalPoint.Api.Models.ItemCategory", b =>
+            modelBuilder.Entity("RentalPoint.Api.Models.Item", b =>
                 {
                     b.HasOne("RentalPoint.Api.Models.Category", "Category")
-                        .WithMany("ItemCategories")
+                        .WithMany("Items")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RentalPoint.Api.Models.Item", "Item")
-                        .WithMany("ItemCategories")
-                        .HasForeignKey("ItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Category");
-
-                    b.Navigation("Item");
-                });
-
-            modelBuilder.Entity("RentalPoint.Api.Models.Payment", b =>
-                {
-                    b.HasOne("RentalPoint.Api.Models.Rental", "Rental")
-                        .WithMany()
-                        .HasForeignKey("RentalId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Rental");
                 });
 
             modelBuilder.Entity("RentalPoint.Api.Models.Rental", b =>
@@ -258,25 +163,6 @@ namespace RentalPoint.Api.Migrations
 
                     b.HasOne("RentalPoint.Api.Models.Item", "Item")
                         .WithMany("Rentals")
-                        .HasForeignKey("ItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Client");
-
-                    b.Navigation("Item");
-                });
-
-            modelBuilder.Entity("RentalPoint.Api.Models.Review", b =>
-                {
-                    b.HasOne("RentalPoint.Api.Models.Client", "Client")
-                        .WithMany("Reviews")
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RentalPoint.Api.Models.Item", "Item")
-                        .WithMany("Reviews")
                         .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -288,23 +174,17 @@ namespace RentalPoint.Api.Migrations
 
             modelBuilder.Entity("RentalPoint.Api.Models.Category", b =>
                 {
-                    b.Navigation("ItemCategories");
+                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("RentalPoint.Api.Models.Client", b =>
                 {
                     b.Navigation("Rentals");
-
-                    b.Navigation("Reviews");
                 });
 
             modelBuilder.Entity("RentalPoint.Api.Models.Item", b =>
                 {
-                    b.Navigation("ItemCategories");
-
                     b.Navigation("Rentals");
-
-                    b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618
         }

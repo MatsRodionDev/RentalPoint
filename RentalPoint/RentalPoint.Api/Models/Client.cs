@@ -9,6 +9,5 @@ namespace RentalPoint.Api.Models
         public string Email { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
         public ICollection<Rental>? Rentals { get; set; }
-        public ICollection<Review>? Reviews { get; set; }
     }
 }

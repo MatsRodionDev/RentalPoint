@@ -11,16 +11,13 @@ namespace RentalPoint.Api.Controllers
     public class RentalController : ControllerBase
     {
         private readonly IRentalService _rentalService;
-        private readonly IPaymentService _paymentService;
         private readonly IMapper _mapper;
 
         public RentalController(
             IRentalService rentalService,
-            IPaymentService paymentService,
             IMapper mapper)
         {
             _rentalService = rentalService;
-            _paymentService = paymentService;
             _mapper = mapper;
         }
 
@@ -62,14 +59,12 @@ namespace RentalPoint.Api.Controllers
             return NoContent();
         }
 
-        [HttpPost("pay")]
-        public async Task<IActionResult> Pay([FromBody] PaymentRequest dto, CancellationToken cancellationToken)
+        [HttpPatch("back/{rentalId}")]
+        public async Task<IActionResult> BackItem(Guid rentalId, CancellationToken cancellationToken)
         {
-            var payment = _mapper.Map<Payment>(dto);
+            await _rentalService.BackItemAsync(rentalId, cancellationToken);
 
-            await _paymentService.CreateAsync(payment, cancellationToken);
-
-            return Created();
+            return NoContent();
         }
     }
 }

@@ -1,7 +1,8 @@
 ﻿namespace RentalPoint.Api.Dto
 {
     public record RentalResponse(
+        Guid Id,
         ItemRequest Item,
-        DateTime RentalDate,
-        DateTime ReturnDate);
+        bool ItemIsBacked,
+        Guid ClientId);
 }
