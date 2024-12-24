@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RentalPoint.Api;
 
@@ -11,9 +12,11 @@ using RentalPoint.Api;
 namespace RentalPoint.Api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241223223742_addSeed2")]
+    partial class addSeed2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -348,29 +351,6 @@ namespace RentalPoint.Api.Migrations
                     b.HasIndex("ItemId");
 
                     b.ToTable("Rentals");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("f7a2b3c4-d5e6-7890-a1b2-c3d4e5f67891"),
-                            ClientId = new Guid("f4a1b2c3-d4e5-6789-abcd-ef0123456789"),
-                            ItemId = new Guid("a1b2c3d4-e5f6-7890-a1b2-c3d4e5f67890"),
-                            ItemIsBacked = false
-                        },
-                        new
-                        {
-                            Id = new Guid("f7a2b3c4-d5e6-7890-a1b2-c3d4e5f67892"),
-                            ClientId = new Guid("c1a2b3d4-e5f6-7890-a1b2-c3d4e5f67890"),
-                            ItemId = new Guid("a1b2c3d4-e5f6-7890-a1b2-c3d4e5f67890"),
-                            ItemIsBacked = false
-                        },
-                        new
-                        {
-                            Id = new Guid("f7a2b3c4-d5e6-7890-a1b2-c3d4e5f67893"),
-                            ClientId = new Guid("4b3e2a1c-5d6f-7890-a1b2-c3d4e5f67890"),
-                            ItemId = new Guid("e1f2c3a4-b5c6-7890-a1b2-c3d4e5f67890"),
-                            ItemIsBacked = false
-                        });
                 });
 
             modelBuilder.Entity("RentalPoint.Api.Models.Item", b =>
